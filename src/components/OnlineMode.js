@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     },
 });
 
-const OnlineMode = () => {
+const OnlineMode = (props) => {
     const [state, setState] = React.useState({
         checkedA: true,
     });
@@ -26,6 +26,7 @@ const OnlineMode = () => {
 
     const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
+        props.handleOnlineState();
     };
     
     return (
