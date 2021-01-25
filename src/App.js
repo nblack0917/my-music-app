@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import TopAppBar from './components/TopAppBar'
 import Login from './components/Login'
+import Dashboard from './components/Dashboard'
 
 const App = () => {
   const [loggedIn, setLogin] = useState(false)
@@ -20,8 +21,7 @@ const App = () => {
   return loggedIn ? (
     <div>
       <TopAppBar />
-      {/* <Dashboard /> */}
-      <h1>Hello</h1>
+      <Dashboard />
     </div>
     ) :
     (
