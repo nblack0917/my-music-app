@@ -1,9 +1,10 @@
 import React from 'react'
+import OnlineMode from './OnlineMode'
 
 function Dashboard() {
     return (
         <div>
-            <h1>Hello There. add some stuff</h1>
+            <OnlineMode />
         </div>
     )
 }
