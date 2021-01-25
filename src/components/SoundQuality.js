@@ -10,23 +10,20 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 
-const useStyles = makeStyles({
+  const useStyles = makeStyles({
     root: {
-      minWidth: 275,
-      maxWidth: 275,
-      height: 200,
+        maxWidth: 250,
+        height: 200,
     },
     title: {
-      fontSize: 14,
+        fontWeight:800,
+        margin: "10px 0",
     },
-    pos: {
-      marginBottom: 12,
-    },
-
     formControl: {
-        minWidth: 260,
-    }
+      minWidth: 260,
+    },
   });
+  
 
   function SoundQuality() {
     const classes = useStyles();
@@ -40,7 +37,7 @@ const useStyles = makeStyles({
     return (
         <Card className={classes.root} variant="outlined">
       <CardContent>
-        <Typography variant="h5" component="h3" color="textPrimary" gutterBottom>
+        <Typography className={classes.title} variant="h5" component="h3" color="textPrimary" gutterBottom>
           Sound Quality
         </Typography>
         <Typography variant="body2" component="p">

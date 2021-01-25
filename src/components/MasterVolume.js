@@ -1,38 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
-const useStyles = makeStyles({
+
+  const useStyles = makeStyles({
     root: {
-      minWidth: 275,
-      maxWidth: 275,
-      height: 200,
+        maxWidth: 250,
+        height: 200,
     },
     title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
+        fontWeight:800,
+        margin: "10px 0",
     },
   });
-
-  function volumetext(volume) {
-    return `${volume}%`;
-  }
-
-function MasterVolume() {
+  
+  function MasterVolume() {
     const classes = useStyles();
+    
+    const [volume, setVolume] = useState(20);
 
+    const handleVolume = (e) => {
+      setVolume(e)
+    }
 
     return (
         <Card className={classes.root} variant="outlined">
       <CardContent>
-        <Typography variant="h5" component="h3" color="textPrimary" gutterBottom>
+        <Typography className={classes.title} variant="h5" component="h3" color="textPrimary" gutterBottom>
           Master Volume
         </Typography>
         <Typography variant="body2" component="p">
@@ -43,7 +41,7 @@ function MasterVolume() {
       <CardActions>
       <Slider
         defaultValue={20}
-        getAriaValueText={volumetext}
+        getAriaValueText={handleVolume}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
         step={10}
