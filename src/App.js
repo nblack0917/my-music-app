@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import TopAppBar from './components/TopAppBar'
 import Login from './components/Login'
 
 const App = () => {
@@ -10,19 +11,24 @@ const App = () => {
       console.log("click")
   }
 
-  return (
-    <div className="App">
-      <Login handleLogin={e => handleLogin(e)}/>
-    </div>
-  );
+  // return (
+  //   <div className="App">
+  //     <Login handleLogin={e => handleLogin(e)}/>
+  //   </div>
+  // );
 
-  return this.state.loggedIn ? (
-    <TopAppBar />
-    <Dashboard />
+  return loggedIn ? (
+    <div>
+      <TopAppBar />
+      {/* <Dashboard /> */}
+      <h1>Hello</h1>
+    </div>
     ) :
     (
-      <TopAppBar />
-      <Login />
+      <div>
+        <TopAppBar />
+        <Login handleLogin={e => handleLogin(e)}/>
+      </div>
     )
 }
 
