@@ -6,7 +6,7 @@ const Login = (props) => {
     const [loggedIn, setLogin] = useState("false")
 
     return (
-        <div>
+        <div style={{ textAlign:"center" }}>
             <TextField  placeholder="User Name" />
             <br /><br />
             <TextField  placeholder="Password" />
