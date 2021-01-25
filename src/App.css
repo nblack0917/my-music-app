@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.dashboardContainer {
+  margin: 30px auto 0;
+  width: 825px;
+}
+
+.dashboardCards {
+  margin: 60px auto 50px;
+  display: flex;
+  width: 800px;
+  justify-content: space-between;
+  align-items: center;
+  /* background: chartreuse; */
+}
