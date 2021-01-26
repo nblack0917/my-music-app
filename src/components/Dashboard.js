@@ -1,41 +1,63 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import OnlineMode from './OnlineMode'
 import MasterVolume from './MasterVolume';
 import SoundQuality from './SoundQuality';
+import { render } from '@testing-library/react';
 
-function Dashboard() {
-    let [ notifications, setNotifications ] = useState([]);
-    const [ onlineState, setOnlineState ] = useState(true);
-    // const [ volumeState, setVolumeState ] = useState(20);
-    // const [ qualityState, setQualityState ] = useState(2);
+class Dashboard extends Component {
+    constructor() {
+        super();
 
-    const handleOnlineState = () => {
-        setOnlineState(!onlineState)
+        this.state={
+            notifications: [],
+            onlineState: true,
+        }
+    }
+    
+    handleOnlineState = () => {
+        const messageOne = "Your application is offline. You won't be able to share or stream music to other devices."
+        this.setState({onlineState: !this.state.onlineState})
         console.log("state changed")
+        if(this.state.onlineState === true) {
+            this.setState({notifications: [...this.state.notifications].concat([messageOne])})
+        }
     }
 
-    const MessageOne = "Your application is offline. You won't be able to share or stream music to other devices."
-    const MessageTwo = "Your application is offline. You won't be able to share or stream music to other devices."
+    // componentDidUpdate() {
+    //     return (
+    //         <div className="dashboardContainer">
+    //             <h2 style={{color: "gray", fontSize: "32px"}}>Welcome User!</h2>
+    //             <div className="dashboardCards">
+    //                 <OnlineMode handleOnlineState={e => this.handleOnlineState(e)}/>
+    //                 <MasterVolume />
+    //                 <SoundQuality />
+    //             </div>
+    //             <h3 style={{ fontWeight: "800", fontSize: "24px"}}>System Notifications:</h3>
+    //             <h3>Hello</h3>
+    //             {/* <ul>
+    //                 <li> {this.state.notifications.map((noti, index) => {
+    //                     return noti
+    //                     })}
+    //                 </li>
+    //             </ul> */}
+    //         </div>
+    //     )
+    // }
 
-    useEffect(() => {
-        // if (!onlineState) {
-        //    
-        
-        // }
-    })
-
-    return (
-        <div className="dashboardContainer">
-            <h2 style={{color: "gray", fontSize: "32px"}}>Welcome User!</h2>
-            <div className="dashboardCards">
-                <OnlineMode handleOnlineState={e => handleOnlineState(e)}/>
-                <MasterVolume />
-                <SoundQuality />
+    render() {
+        return (
+            <div className="dashboardContainer">
+                <h2 style={{color: "gray", fontSize: "32px"}}>Welcome User!</h2>
+                <div className="dashboardCards">
+                    <OnlineMode handleOnlineState={e => this.handleOnlineState(e)}/>
+                    <MasterVolume />
+                    <SoundQuality />
+                </div>
+                <h3 style={{ fontWeight: "800", fontSize: "24px"}}>System Notifications:</h3>
             </div>
-            <h3 style={{ fontWeight: "800", fontSize: "24px"}}>System Notifications:</h3>
-        </div>
-    )
+        )
+    }
 }
 
 export default Dashboard
