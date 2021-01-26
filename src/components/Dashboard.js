@@ -17,33 +17,53 @@ class Dashboard extends Component {
     }
 
     handleOnlineState = (currentOnline) => {
-        const messageOne = "Your application is offline. You won't be able to share or stream music to other devices."
+        // const messageOne = "Your application is offline. You won't be able to share or stream music to other devices."
         this.setState({onlineState: !this.state.onlineState})
         console.log("state 1 changed to ", currentOnline)
         if(currentOnline === false) {
-            this.setState({notifications: [...this.state.notifications].concat([messageOne])})
+            // this.setState({notifications: [...this.state.notifications].concat([messageOne])})
+            this.updateNotifications(1)
         }
         // console.log(this.state.onlineState)
     }
-
+    
     handleVolumeState = (volume) => {
-        const messageTwo = "Listening to music at a high volume could cause long-term hearing loss."
+            const messageTwo = "Listening to music at a high volume could cause long-term hearing loss."
         // console.log(volume)
         this.setState({ volumeState: volume })
         console.log("state 2 changed to: ", volume)
-        if(volume > 70) {
-            this.setState({notifications: [...this.state.notifications].concat([messageTwo])})
-        }
+            if(volume > 70) {
+                // this.setState({notifications: [...this.state.notifications].concat([messageTwo])})
+                this.updateNotifications(2)
+            }
     }
-
+    
     handleQualityState = (qualityLevel) => {
-        const messageThree = "Music quality is degraded. Increase quality if your connection allows it."
+        // let [hour, minute, second] = new Date().toLocaleTimeString("en-US").split(/:| /);
+        // const messageThree = "Music quality is degraded. Increase quality if your connection allows it."
         console.log(qualityLevel)
         this.setState({ qualityState: qualityLevel })
         console.log("state 3 changed to: ", qualityLevel)
         if(qualityLevel === 1) {
-            this.setState({notifications: [...this.state.notifications].concat([messageThree])})
+                // this.setState({notifications: [...this.state.notifications].concat([messageThree])})
+                this.updateNotifications(3)
+            }
+    }
+
+    updateNotifications = (message) => {
+        let notiMessage;
+        let [hour, minute, second] = new Date().toLocaleTimeString("en-US").split(/:| /);
+        const messageOne = "Your application is offline. You won't be able to share or stream music to other devices."
+        const messageTwo = "Listening to music at a high volume could cause long-term hearing loss."
+        const messageThree = "Music quality is degraded. Increase quality if your connection allows it."
+        if (message === 1) {
+            notiMessage = `${hour}:${minute}:${second} - ${messageOne}`
+        } else if(message === 2) {
+            notiMessage = `${hour}:${minute}:${second} - ${messageTwo}`
+        } else if(message === 3) {
+            notiMessage = `${hour}:${minute}:${second} - ${messageThree}`
         }
+        this.setState({notifications: [...this.state.notifications].concat([notiMessage])})
     }
 
     componentDidUpdate() {
