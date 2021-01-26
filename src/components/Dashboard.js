@@ -32,9 +32,11 @@ class Dashboard extends Component {
         // console.log(volume)
         this.setState({ volumeState: volume })
         console.log("state 2 changed to: ", volume)
-            if(volume > 70) {
+            if(volume > 70 && volume < 110) {
                 // this.setState({notifications: [...this.state.notifications].concat([messageTwo])})
                 this.updateNotifications(2)
+            } else if (volume === 110) {
+                this.updateNotifications(4)
             }
     }
     
@@ -56,12 +58,15 @@ class Dashboard extends Component {
         const messageOne = "Your application is offline. You won't be able to share or stream music to other devices."
         const messageTwo = "Listening to music at a high volume could cause long-term hearing loss."
         const messageThree = "Music quality is degraded. Increase quality if your connection allows it."
+        const messageFour = "Well, it's one louder, isn't it? It's not ten. You see, most blokes, you know, will be playing at ten. These go to eleven"
         if (message === 1) {
             notiMessage = `${hour}:${minute}:${second} - ${messageOne}`
         } else if(message === 2) {
             notiMessage = `${hour}:${minute}:${second} - ${messageTwo}`
         } else if(message === 3) {
             notiMessage = `${hour}:${minute}:${second} - ${messageThree}`
+        }else if(message === 4) {
+            notiMessage = `${hour}:${minute}:${second} - ${messageFour}`
         }
         this.setState({notifications: [...this.state.notifications].concat([notiMessage])})
     }
