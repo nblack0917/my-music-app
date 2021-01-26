@@ -1,8 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import Typography from '@material-ui/core/Typography';
@@ -25,12 +23,15 @@ import CardContent from '@material-ui/core/CardContent';
   });
   
 
-  function SoundQuality() {
+  function SoundQuality(props) {
     const classes = useStyles();
     const [quality, setQuality] = React.useState(2);
   
     const handleChange = (event) => {
-      setQuality(event.target.value);
+      const qualityLevel = event.target.value
+      setQuality(qualityLevel);
+      props.handleQualityState(qualityLevel)
+
     };
 
 

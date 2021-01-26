@@ -1,9 +1,8 @@
 
-import React, { Component, useState, useEffect } from 'react'
+import React, { Component } from 'react'
 import OnlineMode from './OnlineMode'
 import MasterVolume from './MasterVolume';
 import SoundQuality from './SoundQuality';
-import { render } from '@testing-library/react';
 
 class Dashboard extends Component {
     constructor() {
@@ -12,49 +11,66 @@ class Dashboard extends Component {
         this.state={
             notifications: [],
             onlineState: true,
-        }
-    }
-    
-    handleOnlineState = () => {
-        const messageOne = "Your application is offline. You won't be able to share or stream music to other devices."
-        this.setState({onlineState: !this.state.onlineState})
-        console.log("state changed")
-        if(this.state.onlineState === true) {
-            this.setState({notifications: [...this.state.notifications].concat([messageOne])})
+            volumeState: 20,
+            qualityState: 2,
         }
     }
 
-    // componentDidUpdate() {
-    //     return (
-    //         <div className="dashboardContainer">
-    //             <h2 style={{color: "gray", fontSize: "32px"}}>Welcome User!</h2>
-    //             <div className="dashboardCards">
-    //                 <OnlineMode handleOnlineState={e => this.handleOnlineState(e)}/>
-    //                 <MasterVolume />
-    //                 <SoundQuality />
-    //             </div>
-    //             <h3 style={{ fontWeight: "800", fontSize: "24px"}}>System Notifications:</h3>
-    //             <h3>Hello</h3>
-    //             {/* <ul>
-    //                 <li> {this.state.notifications.map((noti, index) => {
-    //                     return noti
-    //                     })}
-    //                 </li>
-    //             </ul> */}
-    //         </div>
-    //     )
-    // }
+    handleOnlineState = (currentOnline) => {
+        const messageOne = "Your application is offline. You won't be able to share or stream music to other devices."
+        this.setState({onlineState: !this.state.onlineState})
+        console.log("state 1 changed", currentOnline)
+        if(currentOnline === false) {
+            this.setState({notifications: [...this.state.notifications].concat([messageOne])})
+        }
+        console.log(this.state.onlineState)
+    }
+
+    handleVolumeState = (volume) => {
+        const messageTwo = "Listening to music at a high volume could cause long-term hearing loss."
+        // console.log(volume)
+        this.setState({ volumeState: volume })
+        console.log("state 2 changed")
+        if(this.state.volumeState > 70) {
+            this.setState({notifications: [...this.state.notifications].concat([messageTwo])})
+        }
+    }
+            
+    handleQualityState = (qualityLevel) => {
+        const messageThree = "Music quality is degraded. Increase quality if your connection allows it."
+        console.log(qualityLevel)
+        this.setState({ qualityState: qualityLevel })
+        console.log("state 3 changed")
+        if(qualityLevel === 1) {
+            this.setState({notifications: [...this.state.notifications].concat([messageThree])})
+        }
+    }
+
+    componentDidUpdate() {
+        console.log(this.state.onlineState)
+        console.log(this.state.volumeState)
+        console.log(this.state.qualityState)
+        // const messageOne = "Your application is offline. You won't be able to share or stream music to other devices."
+        // if(this.prevState.onlineState === true) {
+        //     this.setState({notifications: [...this.state.notifications].concat([messageOne])})
+        // }
+    }
 
     render() {
         return (
             <div className="dashboardContainer">
                 <h2 style={{color: "gray", fontSize: "32px"}}>Welcome User!</h2>
                 <div className="dashboardCards">
-                    <OnlineMode handleOnlineState={e => this.handleOnlineState(e)}/>
-                    <MasterVolume />
-                    <SoundQuality />
+                    <OnlineMode handleOnlineState={e => this.handleOnlineState(e)} />
+                    <MasterVolume handleVolumeState={e => this.handleVolumeState(e)} />
+                    <SoundQuality handleQualityState={e => this.handleQualityState(e)}/>
                 </div>
                 <h3 style={{ fontWeight: "800", fontSize: "24px"}}>System Notifications:</h3>
+                <ul style={{ listStyle: "none"}}>
+                    {this.state.notifications.map(notif => {
+                        return <li> {notif} </li>
+                    })}
+                </ul>
             </div>
         )
     }

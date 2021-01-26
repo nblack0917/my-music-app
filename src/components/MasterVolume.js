@@ -18,13 +18,17 @@ import Slider from '@material-ui/core/Slider';
     },
   });
   
-  function MasterVolume() {
+  function MasterVolume(props) {
     const classes = useStyles();
     
     const [volume, setVolume] = useState(20);
 
-    const handleVolume = (e) => {
+    const getVolume = (e) => {
       setVolume(e)
+    }
+
+    const handleVolume = () => {
+      props.handleVolumeState(volume)
     }
 
     return (
@@ -41,13 +45,14 @@ import Slider from '@material-ui/core/Slider';
       <CardActions>
       <Slider
         defaultValue={20}
-        getAriaValueText={handleVolume}
+        getAriaValueText={getVolume}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
         step={10}
         marks
         min={0}
         max={110}
+        onChange={handleVolume}
       />
       </CardActions>
     </Card>

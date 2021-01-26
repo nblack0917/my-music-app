@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -25,9 +25,14 @@ const OnlineMode = (props) => {
     const classes = useStyles();
 
     const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-        props.handleOnlineState();
+        // setState({ ...state, [event.target.name]: event.target.checked });
+        setState({ checkedA: !state.checkedA})
     };
+    
+    const handleOnlineState = () => {
+        const currentOnline = state.checkedA;
+        props.handleOnlineState(currentOnline);
+    }
     
     return (
         <Card className={classes.root} variant="outlined">
@@ -44,6 +49,7 @@ const OnlineMode = (props) => {
                 className={classes.action}
                 checked={state.checkedA}
                 onChange={handleChange}
+                onClick={handleOnlineState}
                 name="checkedA"
                 inputProps={{ 'aria-label': 'secondary checkbox' }}
                 />

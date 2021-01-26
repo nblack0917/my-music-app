@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button'
 
 const Login = (props) => {
-    const [loggedIn, setLogin] = useState("false")
 
     return (
         <div className="loginContainer" style={{ textAlign:"center" }}>
