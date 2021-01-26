@@ -6,10 +6,12 @@ import Dashboard from './components/Dashboard'
 
 const App = () => {
   const [loggedIn, setLogin] = useState(false)
+  const [userName, setUserName] = useState('')
 
-  const handleLogin = () => {
+  const handleLogin = (name) => {
       setLogin(!loggedIn)
       console.log("click")
+      setUserName(name)
   }
 
   // return (
@@ -21,7 +23,7 @@ const App = () => {
   return loggedIn ? (
     <div>
       <TopAppBar />
-      <Dashboard />
+      <Dashboard name={userName} />
     </div>
     ) :
     (

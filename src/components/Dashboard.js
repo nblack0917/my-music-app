@@ -5,8 +5,8 @@ import MasterVolume from './MasterVolume';
 import SoundQuality from './SoundQuality';
 
 class Dashboard extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state={
             notifications: [],
@@ -79,7 +79,7 @@ class Dashboard extends Component {
     render() {
         return (
             <div className="dashboardContainer">
-                <h2 style={{color: "gray", fontSize: "32px"}}>Welcome User!</h2>
+                <h2 style={{color: "gray", fontSize: "32px"}}>Welcome {this.props.name}!</h2>
                 <div className="dashboardCards">
                     <OnlineMode handleOnlineState={e => this.handleOnlineState(e)} />
                     <MasterVolume handleVolumeState={e => this.handleVolumeState(e)} />
