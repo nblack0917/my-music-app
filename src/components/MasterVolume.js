@@ -23,8 +23,9 @@ import Slider from '@material-ui/core/Slider';
     
     const [volume, setVolume] = useState(20);
 
-    const getVolume = (e) => {
-      setVolume(e)
+    const getVolume = (e, newVol) => {
+      setVolume(newVol)
+      console.log(newVol)
     }
 
     const handleVolume = () => {
@@ -45,14 +46,16 @@ import Slider from '@material-ui/core/Slider';
       <CardActions>
       <Slider
         defaultValue={20}
-        getAriaValueText={getVolume}
+        // getAriaValueText={getVolume}
+        value={volume}
         aria-labelledby="discrete-slider"
         valueLabelDisplay="auto"
         step={10}
         marks
         min={0}
         max={110}
-        onChange={handleVolume}
+        onClick={handleVolume}
+        onChange={getVolume}
       />
       </CardActions>
     </Card>

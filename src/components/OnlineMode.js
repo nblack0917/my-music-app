@@ -31,7 +31,7 @@ const OnlineMode = (props) => {
     
     const handleOnlineState = () => {
         const currentOnline = state.checkedA;
-        props.handleOnlineState(currentOnline);
+        props.handleOnlineState(!currentOnline);
     }
     
     return (

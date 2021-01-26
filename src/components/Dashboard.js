@@ -19,37 +19,37 @@ class Dashboard extends Component {
     handleOnlineState = (currentOnline) => {
         const messageOne = "Your application is offline. You won't be able to share or stream music to other devices."
         this.setState({onlineState: !this.state.onlineState})
-        console.log("state 1 changed", currentOnline)
+        console.log("state 1 changed to ", currentOnline)
         if(currentOnline === false) {
             this.setState({notifications: [...this.state.notifications].concat([messageOne])})
         }
-        console.log(this.state.onlineState)
+        // console.log(this.state.onlineState)
     }
 
     handleVolumeState = (volume) => {
         const messageTwo = "Listening to music at a high volume could cause long-term hearing loss."
         // console.log(volume)
         this.setState({ volumeState: volume })
-        console.log("state 2 changed")
-        if(this.state.volumeState > 70) {
+        console.log("state 2 changed to: ", volume)
+        if(volume > 70) {
             this.setState({notifications: [...this.state.notifications].concat([messageTwo])})
         }
     }
-            
+
     handleQualityState = (qualityLevel) => {
         const messageThree = "Music quality is degraded. Increase quality if your connection allows it."
         console.log(qualityLevel)
         this.setState({ qualityState: qualityLevel })
-        console.log("state 3 changed")
+        console.log("state 3 changed to: ", qualityLevel)
         if(qualityLevel === 1) {
             this.setState({notifications: [...this.state.notifications].concat([messageThree])})
         }
     }
 
     componentDidUpdate() {
-        console.log(this.state.onlineState)
-        console.log(this.state.volumeState)
-        console.log(this.state.qualityState)
+        console.log("new onlineState: ", this.state.onlineState)
+        console.log("new volumeState: ",this.state.volumeState)
+        console.log("new qualityState: ",this.state.qualityState)
         // const messageOne = "Your application is offline. You won't be able to share or stream music to other devices."
         // if(this.prevState.onlineState === true) {
         //     this.setState({notifications: [...this.state.notifications].concat([messageOne])})
